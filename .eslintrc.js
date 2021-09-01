@@ -9,7 +9,8 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended',
 	],
 	env: {
-		'shared-node-browser': true
+		'shared-node-browser': true,
+		'node': true,
 	},
 	rules: {
 		'@typescript-eslint/no-explicit-any': 'off',
