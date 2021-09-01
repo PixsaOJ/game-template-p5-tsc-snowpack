@@ -1,7 +1,7 @@
 {
-  "name": "phaser3-ts-snowpack-eslint",
+  "name": "game-template-p5-tsc-snowpack",
   "version": "1.0.0",
-  "description": "A modern Phaser 3 template with TypeScript, Snowpack & ESLint",
+  "description": "Template for p5js and typescript",
   "main": "src/main.ts",
   "scripts": {
     "start": "snowpack dev",
@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "paulasantamaria",
+  "author": "PixsaOJ",
   "license": "MIT",
   "dependencies": {
     "matter-js": "^0.17.1",
