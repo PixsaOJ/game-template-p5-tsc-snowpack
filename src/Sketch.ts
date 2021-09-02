@@ -17,7 +17,7 @@ const boxy: any = {
 };
 
 const config = {
-	FPS: 120
+	FPS: 200
 };
 
 /**
@@ -52,6 +52,7 @@ export default (p: p5): void => {
 		}
 
 		p.rect(boxy.x, boxy.y, boxy.w, boxy.w);
+		boxy.x+= 0.5 + 1 * p.deltaTime / 40;
 
 
 		p.text('Frame Count with frameRate ' +
