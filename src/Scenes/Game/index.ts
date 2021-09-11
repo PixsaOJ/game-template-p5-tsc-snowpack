@@ -49,7 +49,7 @@ export default function(p: p5) {
 		p.fill(p.color(190, 100, 100));
 		p.rect(wally.x, wally.y, wally.w, wally.h);
 
-		boxy.update(deltaTime)
+		// boxy.update(deltaTime) //if i do this in a separate loop, no need to put here
 		boxy.draw()
 
 		p.fill('green');
