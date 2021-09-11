@@ -8,7 +8,7 @@ module.exports = {
 		src: '/dist'
 	},
 	plugins: [
-		'@snowpack/plugin-babel'
+		'@snowpack/plugin-typescript'
 	],
 	devOptions: {
 		port: 8000,
@@ -23,6 +23,7 @@ module.exports = {
 		sourcemap: false
 	},
 	alias: {
+		'@': './src',
 		'@lib': './src/lib',
 		'@Scenes': './src/Scenes'
 	}

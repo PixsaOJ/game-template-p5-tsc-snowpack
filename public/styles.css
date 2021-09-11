@@ -1,10 +1,10 @@
 body {
-  background-color: cyan;
+  background-color: rgb(179, 255, 0);
 
-  height: 100vh;
-  display: flex;
+  /* height: 100vh; */
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 canvas {
@@ -12,4 +12,26 @@ canvas {
   image-rendering: -moz-crisp-edges;
   image-rendering: -webkit-optimize-contrast;
   -ms-interpolation-mode: nearest-neighbor;
+}
+
+html, body, canvas, main {
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+@media screen and (orientation:portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
 }

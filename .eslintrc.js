@@ -6,7 +6,8 @@ module.exports = {
 	],
 	env: {
 		'shared-node-browser': true,
-		'node': true,
+		node: true,
+		browser: true,
 	},
 	rules: {
 		'semi': ['error', 'always'],
@@ -14,7 +15,6 @@ module.exports = {
 		'quotes': ['error', 'single'],
 		'curly': 0,
 		'brace-style': ['error', 'stroustrup'],
-		'eol-last': ['error', 'never'],
 		'indent': [
 			'error',
 			'tab'

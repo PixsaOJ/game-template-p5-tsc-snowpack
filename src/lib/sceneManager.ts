@@ -9,8 +9,15 @@
 // http://github.com/mveteanu
 //@
 
+import p5 from 'p5';
+
 export default class SceneManager {
-	constructor(p) {
+
+	scene: any;
+	p: p5;
+	scenes: any[];
+
+	constructor(p: p5) {
 		this.p = p;
 		this.scenes = [];
 		this.scene = null;
@@ -19,7 +26,8 @@ export default class SceneManager {
 	// Wire relevant p5.js events, except setup()
 	// If you don't call this method, you need to manually wire events
 	wire() {
-		const P5Events = ['mouseClicked',
+		const P5Events = [
+			'mouseClicked',
 			'mousePressed',
 			'mouseReleased',
 			'mouseMoved',
@@ -38,7 +46,7 @@ export default class SceneManager {
 		];
 
 		const me = this;
-		const o = this.p;
+		const o: p5 = this.p;
 
 		// Wire draw manually for speed reasons...
 		o.draw = function () {
@@ -49,9 +57,14 @@ export default class SceneManager {
 		// o.mouseClicked = function() { me.handleEvent("mouseClicked"); }
 		for (let i = 0; i < P5Events.length; i++) {
 			const sEvent = P5Events[i]; // let is necesary to set the scope at the level of for
-			o[sEvent] = function () {
-				me.handleEvent(sEvent);
-			};
+			Object.assign(o, { 
+				[`${sEvent}`]:  function () {
+					me.handleEvent(sEvent);
+				}
+			});
+			// o[sEvent] = function () {
+			// 	me.handleEvent(sEvent);
+			// };
 		}
 
 		return me;
@@ -60,11 +73,12 @@ export default class SceneManager {
 
 	// Add a scene to the collection
 	// You need to add all the scenes if intend to call .showNextScene()
-	addScene(fnScene) {
+	addScene(fnScene: any) {
 		const oScene = fnScene(this.p);
 
 		// inject p as a property of the scene
-		// this.p = p;
+		// this.p = p; I modified this.
+		oScene.p = this.p;
 
 		// inject sceneManager as a property of the scene
 		oScene.sceneManager = this;
@@ -84,7 +98,7 @@ export default class SceneManager {
 	}
 
 	// Return the index of a scene in the internal collection
-	findSceneIndex(fnScene) {
+	findSceneIndex(fnScene: any) {
 		for (let i = 0; i < this.scenes.length; i++) {
 			const o = this.scenes[i];
 			if (o.fnScene == fnScene)
@@ -95,13 +109,13 @@ export default class SceneManager {
 	}
 
 	// Return a scene object wrapper
-	findScene(fnScene) {
+	findScene(fnScene: any) {
 		const i = this.findSceneIndex(fnScene);
 		return i >= 0 ? this.scenes[i] : null;
 	}
 
 	// Returns true if the current displayed scene is fnScene
-	isCurrent (fnScene) {
+	isCurrent (fnScene: any) {
 		if (this.scene == null)
 			return false;
 
@@ -111,7 +125,7 @@ export default class SceneManager {
 	// Show a scene based on the function name
 	// Optionally you can send arguments to the scene
 	// Arguments will be retrieved in the scene via .sceneArgs property
-	showScene (fnScene, sceneArgs) {
+	showScene (fnScene: any, sceneArgs?: any) {
 		let o = this.findScene(fnScene);
 
 		if (o == null)
@@ -129,7 +143,7 @@ export default class SceneManager {
 	// Show the next scene in the collection
 	// Useful if implementing demo applications 
 	// where you want to advance scenes automatically
-	showNextScene(sceneArgs) {
+	showNextScene(sceneArgs : any) {
 		if (this.scenes.length == 0)
 			return;
 
@@ -175,7 +189,7 @@ export default class SceneManager {
 
 	// Handle a certain event for a scene... 
 	// It is used by the anonymous functions from the wire() function
-	handleEvent(sEvent) {
+	handleEvent(sEvent : any) {
 		if (this.scene == null || this.scene.oScene == null)
 			return;
 
