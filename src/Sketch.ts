@@ -20,9 +20,10 @@ export default (p : p5) => {
 
 		p.frameRate(config.FPS);
 		SceneManager.wire();
+		scaleRenderer(p);
 		SceneManager.showScene(Scenes.Game);
 	};
 
-	p.windowResized = scaleRenderer(p);
-	p.deviceTurned = scaleRenderer(p);
+	p.windowResized = () => scaleRenderer(p);
+	p.deviceTurned = () => scaleRenderer(p);
 };

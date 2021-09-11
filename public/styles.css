@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(179, 255, 0);
+  background-color: rgb(88, 88, 88);
 
   /* height: 100vh; */
   /* display: flex;
@@ -14,13 +14,11 @@ canvas {
   -ms-interpolation-mode: nearest-neighbor;
 }
 
-html, body, canvas, main {
+body, canvas, main {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 0;
   margin: 0;
-  max-width: 100% !important;
-  max-height: 100% !important;
 }
 
 @media screen and (orientation:portrait) {
