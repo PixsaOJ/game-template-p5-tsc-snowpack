@@ -1,7 +1,10 @@
 {
-  "display": "fullscreen",
-  "start_url": "/",
+  "name": "Beeline's Game",
+  "short_name": "MB Game",
+  "theme_color": "#000",
+  "background_color": "#000",
+  "display": "fullScreen",
   "orientation": "landscape",
-  "theme_color": "#000000",
-  "background_color": "#000000"
+  "scope": "/",
+  "start_url": "/"
 }
