@@ -33,7 +33,6 @@ export default function (p: p5) {
 	};
 
 	const draw = () => {
-		const deltaTime = p.deltaTime;
 		p.background(0);
 
 		p.noStroke();
