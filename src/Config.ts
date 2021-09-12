@@ -3,5 +3,6 @@ export default {
 	dimensions: {
 		ratio: 4/1,
 		h: 720
-	}
+	},
+	backgroundLoopMultiplier: 2
 };
