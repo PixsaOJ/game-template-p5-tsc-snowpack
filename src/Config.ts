@@ -1,7 +1,7 @@
 export default {
-	FPS: 50,
+	FPS: 120,
 	dimensions: {
-		ratio: 4/1,
+		ratio: 16/9,
 		h: 720
 	},
 	backgroundLoopMultiplier: 2

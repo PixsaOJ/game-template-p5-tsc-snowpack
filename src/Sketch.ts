@@ -12,15 +12,14 @@ export default (p : p5) => {
 	const SceneManager = new p5SceneManager(p);
 	
 	p.setup = () => {
-
-		// Create Canvas
 		globalThis.canvas = p.createCanvas(p.windowWidth, config.dimensions.h).elt;
-
-		setupBrowser();
-
+		
 		p.frameRate(config.FPS);
 		SceneManager.wire();
+		
+		setupBrowser(p);
 		scaleRenderer(p);
+		
 		SceneManager.showScene(Scenes.Game);
 	};
 

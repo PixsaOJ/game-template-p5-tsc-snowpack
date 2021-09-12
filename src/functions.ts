@@ -4,11 +4,12 @@ import Config from './Config';
 /* eslint-env browser, node */
 const goFullScreen = (p: p5): void => {
 	var fs = p.fullscreen();
-	p.fullscreen(!fs);
-	p.resizeCanvas(p.windowWidth, p.windowHeight);
+	p.fullscreen(true);
+	scaleRenderer(p)
 };
 
-const setupBrowser = (): void => {
+const setupBrowser = (p: p5): void => {
+	goFullScreen(p);
 	screen.orientation.lock('landscape');
 };
 
