@@ -11,6 +11,9 @@ export default class GameLoop {
     this.deltaTime = 0
     this.lastTime = this.timestamp()
 
+    if (frameRateLimit > Config.minimumBackgroundLoopFps)
+      this.frameRateLimit = Config.minimumBackgroundLoopFps
+
     this.setup()
     if (runGame) this.loop()
   }
