@@ -1,8 +1,8 @@
 import Boxy from '@/Actors/Boxy';
 import Config from '@/Config';
 import { aspectRatio, goFullScreen } from '@/functions';
-import BackgroundLoop from '@/lib/BackgroundLoop';
-import GameLogic from '@/Scenes/Game/GameLogic';
+import BackgroundLoop from '@/Lib/BackgroundLoop';
+import GameLogic from '@Scenes/Game/GameLogic';
 import { Box, Vector } from 'collider2d';
 import p5 from 'p5';
 

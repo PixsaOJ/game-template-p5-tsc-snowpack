@@ -11,7 +11,7 @@ module.exports = {
 		'@snowpack/plugin-typescript'
 	],
 	devOptions: {
-		port: 8000,
+		port: 3000,
 		open: 'none'
 	},
 	buildOptions: {
@@ -23,8 +23,8 @@ module.exports = {
 		sourcemap: false
 	},
 	alias: {
-		'@': './src',
-		'@lib': './src/lib',
-		'@Scenes': './src/Scenes'
+		'@': './src/',
+		'@lib': './src/lib/',
+		'@Scenes': './src/Scenes/'
 	}
 };

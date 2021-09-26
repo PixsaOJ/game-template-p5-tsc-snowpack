@@ -1,6 +1,6 @@
 import config from '@/Config';
-import { p5SceneManager } from '@lib/index';
-import Scenes from '@Scenes/index';
+import { p5SceneManager } from '@/Lib';
+import { Game } from '@Scenes';
 import p5 from 'p5';
 import { scaleRenderer, setupBrowser } from './functions';
 
@@ -20,7 +20,7 @@ export default (p : p5) => {
 		setupBrowser(p);
 		scaleRenderer(p);
 		
-		SceneManager.showScene(Scenes.Game);
+		SceneManager.showScene(Game);
 	};
 
 	p.windowResized = () => scaleRenderer(p);

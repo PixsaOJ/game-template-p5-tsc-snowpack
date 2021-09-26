@@ -46,7 +46,9 @@
       "baseUrl": "./",
       "paths": {
         "@/*": ["./src/*"],
-        "@lib/*": ["./src/lib/*"],
+        "@lib": ["src/Lib"],
+        "@lib/*": ["src/Lib/*"],
+        "@Scenes": ["./src/Scenes"],
         "@Scenes/*": ["./src/Scenes/*"]
       },
     // "rootDirs": [],                              /* List of root folders whose combined content represents the structure of the project at runtime. */
