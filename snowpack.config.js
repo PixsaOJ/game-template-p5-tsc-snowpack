@@ -24,7 +24,7 @@ module.exports = {
 	},
 	alias: {
 		'@': './src/',
-		'@lib': './src/lib/',
+		'@Lib': './src/Lib/',
 		'@Scenes': './src/Scenes/'
 	}
 };

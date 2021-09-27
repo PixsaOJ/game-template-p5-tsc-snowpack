@@ -6,5 +6,6 @@ interface gameObjects {
     w: number,
     h: number,
     collider: Polygon
-  }
+  },
+  arthur: Arthur
 }

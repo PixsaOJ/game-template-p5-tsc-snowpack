@@ -46,8 +46,8 @@
       "baseUrl": "./",
       "paths": {
         "@/*": ["./src/*"],
-        "@lib": ["src/Lib"],
-        "@lib/*": ["src/Lib/*"],
+        "@Lib": ["src/Lib"],
+        "@Lib/*": ["src/Lib/*"],
         "@Scenes": ["./src/Scenes"],
         "@Scenes/*": ["./src/Scenes/*"]
       },

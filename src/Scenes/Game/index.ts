@@ -5,12 +5,14 @@ import BackgroundLoop from '@/Lib/BackgroundLoop';
 import GameLogic from '@Scenes/Game/GameLogic';
 import { Box, Vector } from 'collider2d';
 import p5 from 'p5';
+import Arthur from '../../Actors/Arthur/index';
+import AnimatedSprite from '../../Lib/AnimatedSprite';
 
 
 export default function (p: p5) {
 
 
-	let boxy: any, wally: any;
+	let boxy: any, wally: any, arthur: Arthur;
 	let gobjs: gameObjects;
 
 	const setup = () => {
@@ -18,15 +20,24 @@ export default function (p: p5) {
 		boxy = new Boxy(p, 200, 200, 2, 100);
 
 		wally = {
-			x: 390,
+			x: 800,
 			y: 100,
 			w: 2,
 			h: 500,
 			collider:
-				new Box(new Vector(390, 100), 2, 500).toPolygon()
+				new Box(new Vector(800, 100), 2, 500).toPolygon()
 		};
 
-		gobjs = { boxy, wally }
+		arthur = new Arthur(p, 200, 200, 120, 110,
+			new AnimatedSprite(
+				p,
+				globalThis.assets.actors.arthur.spriteData,
+				globalThis.assets.actors.arthur.sprite,
+				120, 10
+			)
+		)
+
+		gobjs = { boxy, wally, arthur }
 
 		let gameLogic = new GameLogic(gobjs, p)
 		new BackgroundLoop(gameLogic, 1000 / Config.FPS)
@@ -42,6 +53,7 @@ export default function (p: p5) {
 
 		// boxy.update(deltaTime) //if i do this in a separate loop, no need to put here
 		boxy.draw()
+		arthur.draw()
 
 		p.fill('green');
 		p.rect(p.width - 10, 0, 20, p.height)
