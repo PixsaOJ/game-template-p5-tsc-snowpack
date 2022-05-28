@@ -1,10 +1,10 @@
-import Config from '@/Config';
-import GameLogic from '../Scenes/Game/GameLogic';
+import Config from '@/Config'
+import GameLogic from '../Scenes/Game/GameLogic'
 export default class GameLoop {
 
-  deltaTime: number;
-  lastTime: number;
-  running: boolean = true;
+  deltaTime: number
+  lastTime: number
+  running: boolean = true
 
 
   constructor(readonly logic: GameLogic, readonly frameRateLimit: number, runGame: boolean = true) {
@@ -27,9 +27,9 @@ export default class GameLoop {
   }
 
   loop() {
-    if (!this.running) return;
+    if (!this.running) return
 
-    let self = this;
+    let self = this
     setTimeout(() =>
       requestAnimationFrame(() => self.loop()),
       this.frameRateLimit / Config.backgroundLoopMultiplier
@@ -45,6 +45,6 @@ export default class GameLoop {
   private timestamp() : number {
     return window.performance && window.performance.now
       ? window.performance.now()
-      : new Date().getTime();
+      : new Date().getTime()
   }
 }
