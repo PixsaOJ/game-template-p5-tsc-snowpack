@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 module.exports = {
 	mount: {
 		public: {
@@ -27,4 +28,4 @@ module.exports = {
 		'@Lib': './src/Lib/',
 		'@Scenes': './src/Scenes/'
 	}
-};
+}

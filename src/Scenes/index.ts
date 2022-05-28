@@ -1,5 +1,5 @@
-import Game from './Game/index';
+import Game from './Game/index'
 
 export {
 	Game
-};
+}

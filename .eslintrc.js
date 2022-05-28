@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 module.exports = {
 	root: true,
 	extends: [
@@ -19,4 +20,4 @@ module.exports = {
 			'tab'
 		]
 	}
-};
+}

@@ -9,18 +9,18 @@
 // http://github.com/mveteanu
 //@
 
-import p5 from 'p5';
+import p5 from 'p5'
 
 export default class SceneManager {
 
-	scene: any;
-	p: p5;
-	scenes: any[];
+	scene: any
+	p: p5
+	scenes: any[]
 
 	constructor(p: p5) {
-		this.p = p;
-		this.scenes = [];
-		this.scene = null;
+		this.p = p
+		this.scenes = []
+		this.scene = null
 	}	
 
 	// Wire relevant p5.js events, except setup()
@@ -43,15 +43,15 @@ export default class SceneManager {
 			'deviceMoved',
 			'deviceTurned',
 			'deviceShaken'
-		];
+		]
 
-		const me = this;
-		const o: p5 = this.p;
+		const me = this
+		const o: p5 = this.p
 
 		// Wire draw manually for speed reasons...
 		o.draw = function () {
-			me.draw();
-		};
+			me.draw()
+		}
 
 		// This loop will wire automatically all P5 events to each scene like this:
 		// o.mouseClicked = function() { me.handleEvent("mouseClicked"); }
@@ -59,29 +59,29 @@ export default class SceneManager {
 			const sEvent = P5Events[i]; // let is necesary to set the scope at the level of for
 			Object.assign(o, { 
 				[`${sEvent}`]:  function () {
-					me.handleEvent(sEvent);
+					me.handleEvent(sEvent)
 				}
-			});
+			})
 			// o[sEvent] = function () {
-			// 	me.handleEvent(sEvent);
-			// };
+			// 	me.handleEvent(sEvent)
+			// }
 		}
 
-		return me;
+		return me
 	}
 
 
 	// Add a scene to the collection
 	// You need to add all the scenes if intend to call .showNextScene()
 	addScene(fnScene: any) {
-		const oScene = fnScene(this.p);
+		const oScene = fnScene(this.p)
 
 		// inject p as a property of the scene
 		// this.p = p; I modified this.
-		oScene.p = this.p;
+		oScene.p = this.p
 
 		// inject sceneManager as a property of the scene
-		oScene.sceneManager = this;
+		oScene.sceneManager = this
 
 		const o = {
 			fnScene: fnScene,
@@ -91,53 +91,53 @@ export default class SceneManager {
 			hasDraw: 'draw' in oScene,
 			setupExecuted: false,
 			enterExecuted: false
-		};
+		}
 
-		this.scenes.push(o);
-		return o;
+		this.scenes.push(o)
+		return o
 	}
 
 	// Return the index of a scene in the internal collection
 	findSceneIndex(fnScene: any) {
 		for (let i = 0; i < this.scenes.length; i++) {
-			const o = this.scenes[i];
+			const o = this.scenes[i]
 			if (o.fnScene == fnScene)
-				return i;
+				return i
 		}
 
-		return -1;
+		return -1
 	}
 
 	// Return a scene object wrapper
 	findScene(fnScene: any) {
-		const i = this.findSceneIndex(fnScene);
-		return i >= 0 ? this.scenes[i] : null;
+		const i = this.findSceneIndex(fnScene)
+		return i >= 0 ? this.scenes[i] : null
 	}
 
 	// Returns true if the current displayed scene is fnScene
 	isCurrent (fnScene: any) {
 		if (this.scene == null)
-			return false;
+			return false
 
-		return this.scene.fnScene == fnScene;
+		return this.scene.fnScene == fnScene
 	}
 
 	// Show a scene based on the function name
 	// Optionally you can send arguments to the scene
 	// Arguments will be retrieved in the scene via .sceneArgs property
 	showScene (fnScene: any, sceneArgs?: any) {
-		let o = this.findScene(fnScene);
+		let o = this.findScene(fnScene)
 
 		if (o == null)
-			o = this.addScene(fnScene);
+			o = this.addScene(fnScene)
 
 		// Re-arm the enter function at each show of the scene
-		o.enterExecuted = false;
+		o.enterExecuted = false
 
-		this.scene = o;
+		this.scene = o
 
 		// inject sceneArgs as a property of the scene
-		o.oScene.sceneArgs = sceneArgs;
+		o.oScene.sceneArgs = sceneArgs
 	}
 
 	// Show the next scene in the collection
@@ -145,19 +145,19 @@ export default class SceneManager {
 	// where you want to advance scenes automatically
 	showNextScene(sceneArgs : any) {
 		if (this.scenes.length == 0)
-			return;
+			return
 
-		let nextSceneIndex = 0;
+		let nextSceneIndex = 0
 
 		if (this.scene != null) {
 			// search current scene... 
 			// can be optimized to avoid searching current scene...
-			const i = this.findSceneIndex(this.scene.fnScene);
-			nextSceneIndex = i < this.scenes.length - 1 ? i + 1 : 0;
+			const i = this.findSceneIndex(this.scene.fnScene)
+			nextSceneIndex = i < this.scenes.length - 1 ? i + 1 : 0
 		}
 
-		const nextScene = this.scenes[nextSceneIndex];
-		this.showScene(nextScene.fnScene, sceneArgs);
+		const nextScene = this.scenes[nextSceneIndex]
+		this.showScene(nextScene.fnScene, sceneArgs)
 	}
 
 	// This is the SceneManager .draw() method
@@ -166,23 +166,23 @@ export default class SceneManager {
 	draw () {
 		// take the current scene in a variable to protect it in case
 		// it gets changed by the user code in the events such as setup()...
-		const currScene = this.scene;
+		const currScene = this.scene
 
 		if (currScene == null)
-			return;
+			return
 
 		if (currScene.hasSetup && !currScene.setupExecuted) {
-			currScene.oScene.setup();
-			currScene.setupExecuted = true;
+			currScene.oScene.setup()
+			currScene.setupExecuted = true
 		}
 
 		if (currScene.hasEnter && !currScene.enterExecuted) {
-			currScene.oScene.enter();
-			currScene.enterExecuted = true;
+			currScene.oScene.enter()
+			currScene.enterExecuted = true
 		}
 
 		if (currScene.hasDraw) {
-			currScene.oScene.draw();
+			currScene.oScene.draw()
 		}
 	}
 
@@ -191,21 +191,21 @@ export default class SceneManager {
 	// It is used by the anonymous functions from the wire() function
 	handleEvent(sEvent : any) {
 		if (this.scene == null || this.scene.oScene == null)
-			return;
+			return
 
-		const fnSceneEvent = this.scene.oScene[sEvent];
+		const fnSceneEvent = this.scene.oScene[sEvent]
 		if (fnSceneEvent)
-			fnSceneEvent.call(this.scene.oScene);
+			fnSceneEvent.call(this.scene.oScene)
 	}
 
 	// Legacy method... preserved for maintaining compatibility
 	mousePressed() {
-		this.handleEvent('mousePressed');
+		this.handleEvent('mousePressed')
 	}
 
 	// Legacy method... preserved for maintaining compatibility
 	keyPressed() {
-		this.handleEvent('keyPressed');
+		this.handleEvent('keyPressed')
 	}
 
 }

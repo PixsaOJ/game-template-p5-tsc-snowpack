@@ -1,9 +1,9 @@
-import { Collider2d } from 'collider2d';
-import { EventEmitter } from 'events';
-import p5 from 'p5';
+import { Collider2d } from 'collider2d'
+import { EventEmitter } from 'events'
+import p5 from 'p5'
 
 export default class GameLogic extends EventEmitter {
-  collider2d = new Collider2d();
+  collider2d = new Collider2d()
 
   constructor(public objects: gameObjects, private p: p5) {
     super()
@@ -17,25 +17,24 @@ export default class GameLogic extends EventEmitter {
     arthur.update(deltaTime)
 
     if (boxy.x > p.width) {
-      p.noLoop();
+      p.noLoop()
       this.emit('paused')
     }
     if (this.collider2d.testPolygonPolygon(wally.collider, boxy.collider)) {
-      this.p.noLoop();
+      this.p.noLoop()
       this.emit('paused')
 
     }
 
     if (arthur.x > p.width) {
-      p.noLoop();
+      p.noLoop()
       this.emit('paused')
     }
     if (this.collider2d.testPolygonPolygon(wally.collider, arthur.collider)) {
-      this.p.noLoop();
+      this.p.noLoop()
       this.emit('paused')
 
     }
-    console.log('1');
   }
 
 }
