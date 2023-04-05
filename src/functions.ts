@@ -2,42 +2,46 @@ import p5 from 'p5'
 import Config from './Config'
 
 /* eslint-env browser, node */
-const goFullScreen = (p: p5): void => {
-	var fs = p.fullscreen()
+const goFullScreen = (p5: p5): void => {
+	var fs = p5.fullscreen()
 	try {
-		p.fullscreen(true)
+		p5.fullscreen(true)
 	} catch (error: any) {
 		console.log(error.message)
 	}
-	scaleRenderer(p)
+	scaleRenderer(p5)
 }
 
-const setupBrowser = (p: p5): void => {
-	goFullScreen(p)
+const setupBrowser = (p5: p5): void => {
+	goFullScreen(p5)
 	screen.orientation.lock('landscape')
 		.catch(console.log)
 }
 
-const scaleRenderer = (p: p5) => {
+const scaleRenderer = (p5: p5) => {
 
 	// Set drawing size
 	let choosenDrawingHeight = Config.dimensions.h
 
-	let actualSize = p.deviceOrientation === p.PORTRAIT ? p.windowHeight : p.windowWidth
-	let choosenDrawingWidth = p.min(choosenDrawingHeight * Config.dimensions.ratio, actualSize)
+	let actualSize = p5.deviceOrientation === p5.PORTRAIT ? p5.windowHeight : p5.windowWidth
+	let choosenDrawingWidth = p5.min(choosenDrawingHeight * Config.dimensions.ratio, actualSize)
+	choosenDrawingWidth = choosenDrawingHeight*Config.dimensions.ratio
 
-	p.resizeCanvas(choosenDrawingWidth, choosenDrawingHeight)
+	p5.resizeCanvas(choosenDrawingWidth, choosenDrawingHeight)
 
 	// Stretch canvas to fill
-	if (p.deviceOrientation === p.PORTRAIT) {
-		canvas.style.height = '100vw'
-		canvas.style.width = '100vh'
-	} else {
-		canvas.style.height = '100vh'
-		canvas.style.width = '100vw'
-	}
+	// if (p5.deviceOrientation === p5.PORTRAIT) {
+	// 	canvas.style.height = '100vw'
+	// 	canvas.style.width = '100vh'
+	// } else {
+	// 	canvas.style.height = '100vh'
+	// 	canvas.style.width = '100vw'
+	// }
 
-	p.draw()
+	canvas.style.height = '100%'
+	canvas.style.width = '100%'
+
+	p5.draw()
 }
 
 function aspectRatio(val: number, lim: number) {

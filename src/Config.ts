@@ -3,7 +3,7 @@ export default {
 	minimumBackgroundLoopFps: 1000/60, // 60 FPS
 	dimensions: {
 		ratio: 16/9,
-		h: 720
+		h: 720,
 	},
 	backgroundLoopMultiplier: 2
 }

@@ -3,38 +3,48 @@ import { p5SceneManager } from '@/Lib'
 import { Game } from '@Scenes'
 import p5 from 'p5'
 import { scaleRenderer, setupBrowser } from './functions'
-// import global from './global'
 
 
 /**
- * @param p
+ * @param p5: p5
  */
-export default (p : p5) => {
-	const SceneManager = new p5SceneManager(p)
+export default (p5 : p5) => {
+	const SceneManager = new p5SceneManager(p5)
 	
-	p.preload = () => {
+	p5.preload = () => {
 		globalThis.assets = {
 			actors: {
 				arthur: {
-					sprite: p.loadImage('./assets/actors/arthur/running.png'),
-					spriteData: p.loadJSON('./assets/actors/arthur/running.json')
+					sprite: p5.loadImage('./assets/actors/arthur/running.png'),
+					spriteData: p5.loadJSON('./assets/actors/arthur/running.json')
 				}
 			}
 		}
 	}
 	
-	p.setup = () => {
-		globalThis.canvas = p.createCanvas(p.windowWidth, config.dimensions.h).elt
+	p5.setup = () => {
+		globalThis.canvas = p5.createCanvas(p5.windowWidth, config.dimensions.h).elt
 		
-		p.frameRate(config.FPS)
+		p5.frameRate(config.FPS)
 		SceneManager.wire()
 		
-		setupBrowser(p)
-		scaleRenderer(p)
+		setupBrowser(p5)
+		scaleRenderer(p5)
 		
 		SceneManager.showScene(Game)
 	}
 
-	p.windowResized = () => scaleRenderer(p)
-	p.deviceTurned = () => scaleRenderer(p)
+	p5.windowResized = () => scaleRenderer(p5)
+	p5.deviceTurned = () => {
+		scaleRenderer(p5)
+	} 
+
+	// window.addEventListener("deviceorientation", function (event: Event) {
+	// 	// alert('alo')
+	// }, true);
+
+	// window.addEventListener("orientationchange", ev => {
+	// 	console.log(ev.target.screen)
+	// 	alert(ev.target.screen.orientation.angle)
+	// })
 }

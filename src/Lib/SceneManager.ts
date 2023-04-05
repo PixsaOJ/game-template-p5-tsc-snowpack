@@ -13,12 +13,12 @@ import p5 from 'p5'
 
 export default class SceneManager {
 
+	p5: p5
 	scene: any
-	p: p5
 	scenes: any[]
 
-	constructor(p: p5) {
-		this.p = p
+	constructor(p5: p5) {
+		this.p5 = p5
 		this.scenes = []
 		this.scene = null
 	}	
@@ -46,10 +46,10 @@ export default class SceneManager {
 		]
 
 		const me = this
-		const o: p5 = this.p
+		const p5: p5 = this.p5
 
 		// Wire draw manually for speed reasons...
-		o.draw = function () {
+		p5.draw = function () {
 			me.draw()
 		}
 
@@ -57,7 +57,7 @@ export default class SceneManager {
 		// o.mouseClicked = function() { me.handleEvent("mouseClicked"); }
 		for (let i = 0; i < P5Events.length; i++) {
 			const sEvent = P5Events[i]; // let is necesary to set the scope at the level of for
-			Object.assign(o, { 
+			Object.assign(p5, { 
 				[`${sEvent}`]:  function () {
 					me.handleEvent(sEvent)
 				}
@@ -74,11 +74,11 @@ export default class SceneManager {
 	// Add a scene to the collection
 	// You need to add all the scenes if intend to call .showNextScene()
 	addScene(fnScene: any) {
-		const oScene = fnScene(this.p)
+		const oScene = fnScene(this.p5)
 
 		// inject p as a property of the scene
-		// this.p = p; I modified this.
-		oScene.p = this.p
+		// this.p5 = p; I modified this.
+		oScene.p = this.p5
 
 		// inject sceneManager as a property of the scene
 		oScene.sceneManager = this
